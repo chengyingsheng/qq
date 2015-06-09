@@ -2,6 +2,7 @@ package com.cheng.client_ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -49,7 +50,6 @@ public class LoginGui extends JFrame implements ActionListener {
 	 * 加载登入界面
 	 */
 	public void laughLogin() {
-
 		Client_Location_X = (int) ((this.getToolkit().getScreenSize()
 				.getWidth() - Client_Wide) / 2);
 		Client_Location_Y = (int) ((this.getToolkit().getScreenSize()
@@ -59,7 +59,7 @@ public class LoginGui extends JFrame implements ActionListener {
 		this.setResizable(false);
 		this.setBounds(Client_Location_X, Client_Location_Y, Client_Wide,
 				Client_High);
-		this.setIconImage(SwingResourceManager.getImage("images\\icon.png"));
+		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath()+"images/icon.png"));
 		this.setVisible(true);
 	}
 

@@ -66,6 +66,7 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 		this.setBounds(100, 100, 400, 600);
 		this.setResizable(false);
 		this.setVisible(true);
+		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath()+"images/icon.png"));
 	}
 
 	public SeverMainGUI() {
