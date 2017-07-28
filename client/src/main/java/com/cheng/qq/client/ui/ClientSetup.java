@@ -1,12 +1,8 @@
 package com.cheng.qq.client.ui;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class ClientSetup extends JDialog implements ActionListener {
 
@@ -20,25 +16,6 @@ public class ClientSetup extends JDialog implements ActionListener {
 	private JButton filebutton_1 = new JButton("浏览");
 	private JButton filebutton_2 = new JButton("确认");
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			/*ClientSetup dialog = new ClientSetup();
-			dialog.laugh();*/
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void laugh() {
-		this.setTitle("设置");
-		this.setResizable(false);
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
-	}
 
 	public ClientSetup(String filesavepath) {
 		//this.filesavepath = filesavepath;
@@ -89,6 +66,25 @@ public class ClientSetup extends JDialog implements ActionListener {
 		logbutton_1.addActionListener(this);
 		filebutton_1.addActionListener(this);
 		filebutton_2.addActionListener(this);
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			/*ClientSetup dialog = new ClientSetup();
+			dialog.laugh();*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void laugh() {
+		this.setTitle("设置");
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {

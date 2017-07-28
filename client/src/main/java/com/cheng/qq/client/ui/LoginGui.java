@@ -3,11 +3,10 @@ package com.cheng.qq.client.ui;
 import com.cheng.qq.client.ClientConnect;
 import com.cheng.qq.common.SwingResourceManager;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class LoginGui extends JFrame implements ActionListener {
@@ -22,45 +21,15 @@ public class LoginGui extends JFrame implements ActionListener {
 	private static int Client_Wide = 350;
 	private static int Client_High = 250;
 	//
-
+	private static LoginGui loginGUI;
+	private static ClientMainGUI c;
 	//用户账号，用户密码
 	public JTextField UsernametextField;
 	private JPasswordField passwordField;
-
-
 	//按钮
 	private JButton button_1 = new JButton("登入");
 	private JButton button = new JButton("注册");
-
 	private ClientConnect client;
-	private static  LoginGui loginGUI;
-	private static ClientMainGUI c;
-
-	public static void main(String[] args) {
-		try {
-			JFrame.setDefaultLookAndFeelDecorated(true);
-			loginGUI = new LoginGui();
-			loginGUI.laughLogin();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	/**
-	 * 加载登入界面
-	 */
-	public void laughLogin() {
-		Client_Location_X = (int) ((this.getToolkit().getScreenSize()
-				.getWidth() - Client_Wide) / 2);
-		Client_Location_Y = (int) ((this.getToolkit().getScreenSize()
-				.getHeight() - Client_High) / 2);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("登入界面");
-		this.setResizable(false);
-		this.setBounds(Client_Location_X, Client_Location_Y, Client_Wide,
-				Client_High);
-		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath() + "images/icon.png"));
-		this.setVisible(true);
-	}
 
 	public LoginGui() {
 
@@ -103,6 +72,33 @@ public class LoginGui extends JFrame implements ActionListener {
 		button_1.addActionListener(this);
 	}
 
+	public static void main(String[] args) {
+		try {
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			loginGUI = new LoginGui();
+			loginGUI.laughLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 加载登入界面
+	 */
+	public void laughLogin() {
+		Client_Location_X = (int) ((this.getToolkit().getScreenSize()
+				.getWidth() - Client_Wide) / 2);
+		Client_Location_Y = (int) ((this.getToolkit().getScreenSize()
+				.getHeight() - Client_High) / 2);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("登入界面");
+		this.setResizable(false);
+		this.setBounds(Client_Location_X, Client_Location_Y, Client_Wide,
+				Client_High);
+		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath() + "images/icon.png"));
+		this.setVisible(true);
+	}
+
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == button_1) {
@@ -112,14 +108,13 @@ public class LoginGui extends JFrame implements ActionListener {
 			//创建主窗口
 			c = new ClientMainGUI(username);
 			//连接服务器
-			client = ClientConnect.getInstance(loginGUI,c, username, password);
+			client = ClientConnect.getInstance(loginGUI, c, username, password);
 			client.Connect();
 
 		} else if (e.getSource() == button) {
 
 		}
 	}
-
 
 
 }

@@ -5,16 +5,18 @@ import com.cheng.qq.common.SwingResourceManager;
 import com.cheng.qq.common.UserValue;
 import com.cheng.qq.server.ServerListen;
 
-import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 
 public class SeverMainGUI extends JFrame implements ActionListener {
@@ -37,35 +39,6 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 	private JButton button_1 = new JButton("发送");
 	private JMenuItem serverSetup;
 	private JMenu help;
-
-	public static void main(String[] args) {
-
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		SeverMainGUI SeverMainGUI = new SeverMainGUI();
-		SeverMainGUI.laughServer();
-	}
-
-	/**
-	 * 加载主界面
-	 */
-	public void laughServer() {
-		this.setIconImage(SwingResourceManager.getImage("images\\icon.png"));
-		this.addWindowListener(new WindowAdapter() {
-
-			public void windowClosing(WindowEvent arg0) {
-				// 发送服务器关闭消息
-				stopService();
-				System.exit(0);
-
-			}
-
-		});
-		this.setTitle("Server");
-		this.setBounds(100, 100, 400, 600);
-		this.setResizable(false);
-		this.setVisible(true);
-		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath()+"images/icon.png"));
-	}
 
 	public SeverMainGUI() {
 
@@ -142,6 +115,35 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 		button_1.addActionListener(this);
 		serverSetup.addActionListener(this);
 
+	}
+
+	public static void main(String[] args) {
+
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		SeverMainGUI SeverMainGUI = new SeverMainGUI();
+		SeverMainGUI.laughServer();
+	}
+
+	/**
+	 * 加载主界面
+	 */
+	public void laughServer() {
+		this.setIconImage(SwingResourceManager.getImage("images\\icon.png"));
+		this.addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(WindowEvent arg0) {
+				// 发送服务器关闭消息
+				stopService();
+				System.exit(0);
+
+			}
+
+		});
+		this.setTitle("Server");
+		this.setBounds(100, 100, 400, 600);
+		this.setResizable(false);
+		this.setVisible(true);
+		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath() + "images/icon.png"));
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -236,8 +238,7 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 	/**
 	 * 给所有在线用户发送消息
 	 *
-	 * @param message
-	 *            要发送的消息对象
+	 * @param message 要发送的消息对象
 	 */
 	public void sendMessageToAll(Message message) {
 

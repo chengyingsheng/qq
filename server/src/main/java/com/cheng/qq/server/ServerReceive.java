@@ -4,9 +4,6 @@ import com.cheng.qq.common.Message;
 import com.cheng.qq.common.UserValue;
 
 import javax.swing.*;
-
-
-
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -15,11 +12,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class ServerReceive extends Thread {
+	public boolean isStop;
 	private JTextArea messageHistory;
 	private JComboBox combobox;
 	private UserValue user;
 	private Map<String, UserValue> users;
-	public boolean isStop;
 
 	public ServerReceive(JTextArea textarea, JComboBox combobox,
 						 UserValue user, Map<String, UserValue> users) {
@@ -85,12 +82,10 @@ public class ServerReceive extends Thread {
 	}
 
 
-
 	/**
 	 * 给所有在线用户发送消息
 	 *
-	 * @param message
-	 *            要发送的消息对象
+	 * @param message 要发送的消息对象
 	 */
 	public void sendMessageToAll(Message message) {
 
@@ -108,10 +103,8 @@ public class ServerReceive extends Thread {
 	/**
 	 * 接受文件
 	 *
-	 * @param path
-	 *            接受文件的保存路径
-	 * @param message
-	 *            发送者给接受的者得提示信息
+	 * @param path    接受文件的保存路径
+	 * @param message 发送者给接受的者得提示信息
 	 */
 	public void receiveFile(String path, Message message) {
 
@@ -136,10 +129,8 @@ public class ServerReceive extends Thread {
 	/**
 	 * 转发文件
 	 *
-	 * @param userA
-	 *            转发文件的接受者
-	 * @param message
-	 *            发送者发给接受者得提示信息
+	 * @param userA   转发文件的接受者
+	 * @param message 发送者发给接受者得提示信息
 	 */
 	public void forwardingFile(UserValue userA, Message message) {
 

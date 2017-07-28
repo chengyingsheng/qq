@@ -1,37 +1,16 @@
 package com.cheng.qq.client.ui;
 
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 
 
-public class Help extends JDialog implements ActionListener{
+public class Help extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 4953186894067408669L;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Help dialog = new Help();
-			dialog.laugh();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	private JButton button;
 
-	public void laugh(){
-		this.setResizable(false);
-		this.setTitle("帮助");
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
-	}
 	/**
 	 * Create the dialog.
 	 */
@@ -70,8 +49,27 @@ public class Help extends JDialog implements ActionListener{
 		button.addActionListener(this);
 	}
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Help dialog = new Help();
+			dialog.laugh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void laugh() {
+		this.setResizable(false);
+		this.setTitle("帮助");
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
+	}
+
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==button){
+		if (e.getSource() == button) {
 			System.exit(0);
 		}
 	}

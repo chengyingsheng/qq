@@ -1,23 +1,16 @@
 package com.cheng.qq.common;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 /**
  * Utility class for managing resources such as colors, fonts, images, etc.
- *
+ * <p/>
  * This class may be freely distributed as part of any application or plugin.
- * <p>
+ * <p/>
  * Copyright (c) 2003 - 2004, Instantiations, Inc. <br>All Rights Reserved
  *
  * @author scheglov_ke
@@ -31,6 +24,7 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an image encoded by the specified input stream
+	 *
 	 * @param is InputStream The input stream encoding the image data
 	 * @return Image The image encoded by the specified input stream
 	 */
@@ -53,8 +47,9 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an image stored in the file at the specified path relative to the specified class
+	 *
 	 * @param clazz Class The class relative to which to find the image
-	 * @param path String The path to the image file
+	 * @param path  String The path to the image file
 	 * @return Image The image stored in the file at the specified path
 	 */
 	public static Image getImage(Class<?> clazz, String path) {
@@ -74,6 +69,7 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an image stored in the file at the specified path
+	 *
 	 * @param path String The path to the image file
 	 * @return Image The image stored in the file at the specified path
 	 */
@@ -83,8 +79,9 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an image stored in the file at the specified path
+	 *
 	 * @param section String The storage section in the cache
-	 * @param path String The path to the image file
+	 * @param path    String The path to the image file
 	 * @return Image The image stored in the file at the specified path
 	 */
 	public static Image getImage(String section, String path) {
@@ -105,10 +102,11 @@ public class SwingResourceManager {
 
 	/**
 	 * Clear cached images in specified section
+	 *
 	 * @param section the section do clear
 	 */
 	public static void clearImages(String section) {
-		for (Iterator<String> I = m_ClassImageMap.keySet().iterator(); I.hasNext();) {
+		for (Iterator<String> I = m_ClassImageMap.keySet().iterator(); I.hasNext(); ) {
 			String key = I.next();
 			if (!key.startsWith(section + '|'))
 				continue;
@@ -120,8 +118,9 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an icon stored in the file at the specified path relative to the specified class
+	 *
 	 * @param clazz Class The class relative to which to find the icon
-	 * @param path String The path to the icon file
+	 * @param path  String The path to the icon file
 	 * @return Icon The icon stored in the file at the specified path
 	 */
 	public static ImageIcon getIcon(Class<?> clazz, String path) {
@@ -130,6 +129,7 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an icon stored in the file at the specified path
+	 *
 	 * @param path String The path to the icon file
 	 * @return Icon The icon stored in the file at the specified path
 	 */
@@ -139,8 +139,9 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an icon stored in the file at the specified path
+	 *
 	 * @param section String The storage section in the cache
-	 * @param path String The path to the icon file
+	 * @param path    String The path to the icon file
 	 * @return Icon The icon stored in the file at the specified path
 	 */
 	public static ImageIcon getIcon(String section, String path) {
@@ -149,6 +150,7 @@ public class SwingResourceManager {
 
 	/**
 	 * Returns an icon based on the specified image
+	 *
 	 * @param image Image The original image
 	 * @return Icon The icon based on the image
 	 */
@@ -157,8 +159,10 @@ public class SwingResourceManager {
 			return null;
 		return new ImageIcon(image);
 	}
+
 	/**
 	 * Returns an icon stored in the file at the specified path
+	 *
 	 * @param path String The path to the icon file
 	 * @return
 	 */

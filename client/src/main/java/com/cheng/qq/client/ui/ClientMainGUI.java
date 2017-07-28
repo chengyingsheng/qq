@@ -4,11 +4,13 @@ import com.cheng.qq.client.ClientConnect;
 import com.cheng.qq.common.Message;
 import com.cheng.qq.common.SwingResourceManager;
 
-import java.awt.event.*;
-import java.io.File;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 
 public class ClientMainGUI extends JFrame implements ActionListener {
@@ -18,8 +20,8 @@ public class ClientMainGUI extends JFrame implements ActionListener {
 	//主界面大小及显示位置
 	private static int Client_Wide = 400;
 	private static int Client_High = 600;
-	private static int Client_Location_X ;
-	private static int Client_Location_Y ;
+	private static int Client_Location_X;
+	private static int Client_Location_Y;
 
 	//文件地址显示
 	private JTextField textField;
@@ -41,27 +43,6 @@ public class ClientMainGUI extends JFrame implements ActionListener {
 	private File sendfile;
 	private String filesavepath;
 
-
-	/**
-	 * 加载主界面
-	 */
-	public void laughClient(){
-
-		Client_Location_X = (int) ((this.getToolkit().getScreenSize().getWidth()-Client_Wide)/2);
-		Client_Location_Y = (int) ((this.getToolkit().getScreenSize().getHeight()-Client_High)/2);
-		this.setBounds(Client_Location_X, Client_Location_Y, Client_Wide, Client_High);
-		this.setIconImage(SwingResourceManager.getImage("images\\icon.png"));
-		this.addWindowListener(new WindowAdapter(){
-			public void windowClosing(WindowEvent arg0) {
-				//关闭主界面时发送下线消息
-				ClientConnect.getInstance(null, null, null, null).DisConnect();
-				System.exit(0);
-			}
-		});
-		this.setTitle("Client");
-		this.setResizable(false);
-		this.setVisible(true);
-	}
 
 	public ClientMainGUI(String username) {
 
@@ -90,7 +71,7 @@ public class ClientMainGUI extends JFrame implements ActionListener {
 		out = new JMenuItem("退出");
 		menu.add(out);
 
-		label_4 = new JLabel("欢迎 "+username);
+		label_4 = new JLabel("欢迎 " + username);
 		label_4.setBounds(10, 31, 365, 25);
 		contentPane.add(label_4);
 
@@ -148,17 +129,37 @@ public class ClientMainGUI extends JFrame implements ActionListener {
 		help.addActionListener(this);
 	}
 
+	/**
+	 * 加载主界面
+	 */
+	public void laughClient() {
+
+		Client_Location_X = (int) ((this.getToolkit().getScreenSize().getWidth() - Client_Wide) / 2);
+		Client_Location_Y = (int) ((this.getToolkit().getScreenSize().getHeight() - Client_High) / 2);
+		this.setBounds(Client_Location_X, Client_Location_Y, Client_Wide, Client_High);
+		this.setIconImage(SwingResourceManager.getImage("images\\icon.png"));
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent arg0) {
+				//关闭主界面时发送下线消息
+				ClientConnect.getInstance(null, null, null, null).DisConnect();
+				System.exit(0);
+			}
+		});
+		this.setTitle("Client");
+		this.setResizable(false);
+		this.setVisible(true);
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		//发送消息
-		if(e.getSource() == sendMessage){
+		if (e.getSource() == sendMessage) {
 			//得到消息内容
 			String from = username;
 			String to = userListBox.getSelectedItem().toString();
 			String content = messageTextArea.getText();
-			if(content==null||content.equals("")){
+			if (content == null || content.equals("")) {
 				JOptionPane.showMessageDialog(this, "消息不能为空");
-			}
-			else{
+			} else {
 				//构造消息
 				Message message = new Message();
 				message.setMessageContent(content);
@@ -166,39 +167,35 @@ public class ClientMainGUI extends JFrame implements ActionListener {
 				message.setMessageTo(to);
 				message.setMessageType("聊天");
 				//发送消息
-				ClientConnect.getInstance( null,null, null, null).sendMessage(message);
+				ClientConnect.getInstance(null, null, null, null).sendMessage(message);
 				//将发送的消息添加到聊天记录中
 				//history.append(messageTextArea.getText()+"\n");
 				messageTextArea.setText("");
 			}
 
-		} else if(e.getSource() == fileChange){
+		} else if (e.getSource() == fileChange) {
 			JFileChooser cho = new JFileChooser();
-			int ch=cho.showOpenDialog(this);
-			if(ch==JFileChooser.APPROVE_OPTION)
-			{
+			int ch = cho.showOpenDialog(this);
+			if (ch == JFileChooser.APPROVE_OPTION) {
 				//得到选择的文件
 				sendfile = cho.getSelectedFile();
 				textField.setText(sendfile.getPath());
 			}
-		} else if(e.getSource() == sendFile){
+		} else if (e.getSource() == sendFile) {
 			//发送上传文件提示信息
 
 			//上传文件
 			ClientConnect.getInstance(null, null, null, null).SendFile(userListBox.getSelectedItem().toString(), sendfile);
-		}else if(e.getSource() == out){
+		} else if (e.getSource() == out) {
 			//关闭主界面时发送下线消息
 			ClientConnect.getInstance(null, null, null, null).DisConnect();
 			System.exit(0);
-		}
-		else if(e.getSource() == historyItem){
+		} else if (e.getSource() == historyItem) {
 
-		}
-		else if(e.getSource() == clientsetup){
+		} else if (e.getSource() == clientsetup) {
 			ClientSetup clientsetup = new ClientSetup(filesavepath);
 			clientsetup.laugh();
-		}
-		else if(e.getSource() == help){
+		} else if (e.getSource() == help) {
 			Help dialog = new Help();
 			dialog.laugh();
 		}

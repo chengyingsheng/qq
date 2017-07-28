@@ -5,13 +5,16 @@ import com.cheng.qq.client.ui.ClientMainGUI;
 import com.cheng.qq.client.ui.LoginGui;
 import com.cheng.qq.common.Message;
 
-import java.io.*;
-import java.net.*;
-
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 public class ClientConnect {
 
+	private static ClientConnect ds = null;
 	private Socket socket;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -20,7 +23,6 @@ public class ClientConnect {
 	private String password;
 	private LoginGui loginGUI;
 	private ClientMainGUI c;
-	private static ClientConnect ds = null;
 
 	public ClientConnect(LoginGui loginGUI, ClientMainGUI c, String username,
 						 String password) {
@@ -38,6 +40,7 @@ public class ClientConnect {
 		}
 		return ds;
 	}
+
 	/**
 	 * 连接服务器
 	 */
@@ -76,6 +79,7 @@ public class ClientConnect {
 			e.printStackTrace();
 		}
 	}
+
 	//断开和服务器的连接
 	public void DisConnect() {
 
@@ -94,8 +98,10 @@ public class ClientConnect {
 		} catch (Exception e) {
 		}
 	}
+
 	/**
 	 * 发送一个消息
+	 *
 	 * @param message 要发送的消息对象
 	 */
 	public void sendMessage(Message message) {
@@ -108,7 +114,7 @@ public class ClientConnect {
 
 	}
 
-	public void SendFile(String to , File file) {
+	public void SendFile(String to, File file) {
 
 		try {
 			Message m = new Message();
@@ -124,13 +130,12 @@ public class ClientConnect {
 				fileStream = new FileInputStream(file);
 				byte[] bytes = new byte[1024];
 				int cont = 0;
-				while((cont = fileStream.read(bytes))!=-1)
-				{
-					output.write(bytes,0,cont);
+				while ((cont = fileStream.read(bytes)) != -1) {
+					output.write(bytes, 0, cont);
 					System.out.println(bytes);
 				}
 				fileStream.close();
-				JOptionPane.showMessageDialog(null,"上传完毕");
+				JOptionPane.showMessageDialog(null, "上传完毕");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

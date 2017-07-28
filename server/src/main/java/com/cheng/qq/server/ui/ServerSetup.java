@@ -1,15 +1,11 @@
 package com.cheng.qq.server.ui;
 
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-public class ServerSetup  extends JDialog implements ActionListener {
+public class ServerSetup extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = -4198900740802914459L;
 	private JTextField textField;
@@ -20,26 +16,6 @@ public class ServerSetup  extends JDialog implements ActionListener {
 	private JButton logbutton_1 = new JButton("确定");
 	private JButton filebutton_1 = new JButton("浏览");
 	private JButton filebutton_2 = new JButton("确认");
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ServerSetup dialog = new ServerSetup();
-			dialog.laugh();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void laugh() {
-		this.setTitle("设置");
-		this.setResizable(false);
-		//this.
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
-	}
 
 	public ServerSetup() {
 		setBounds(100, 100, 450, 200);
@@ -91,14 +67,34 @@ public class ServerSetup  extends JDialog implements ActionListener {
 		filebutton_2.addActionListener(this);
 	}
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			ServerSetup dialog = new ServerSetup();
+			dialog.laugh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void laugh() {
+		this.setTitle("设置");
+		this.setResizable(false);
+		//this.
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
+	}
+
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==logbutton){
+		if (e.getSource() == logbutton) {
 
-		}else if(e.getSource()==logbutton_1){
+		} else if (e.getSource() == logbutton_1) {
 
-		}else if(e.getSource()==filebutton_1){
+		} else if (e.getSource() == filebutton_1) {
 
-		}else if(e.getSource()==filebutton_2){
+		} else if (e.getSource() == filebutton_2) {
 
 		}
 	}

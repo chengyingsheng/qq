@@ -4,8 +4,10 @@ package com.cheng.qq.client;
 import com.cheng.qq.client.ui.ClientMainGUI;
 import com.cheng.qq.common.Message;
 
-import java.io.*;
-import java.net.*;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 public class ClientReceive extends Thread {
 
@@ -77,10 +79,10 @@ public class ClientReceive extends Thread {
 									} else
 										// 传送文件
 										if (message.getMessageType().equalsIgnoreCase("传送文件")) {
-											String path ="D:";
+											String path = "D:";
 											clientMainGUI.getHistory().append(
 													" 用户：" + message.getMessageFrom() + "给你发送了文件："
-															+ message.getMessageContent() +"    文件保存在："+path+ "\n");
+															+ message.getMessageContent() + "    文件保存在：" + path + "\n");
 											//接收文件信息
 
 											receiveFile(path, message);
@@ -93,19 +95,19 @@ public class ClientReceive extends Thread {
 
 	/**
 	 * 接受文件
+	 *
 	 * @param path
 	 * @param message
 	 */
-	public void receiveFile(String path,Message message) {
+	public void receiveFile(String path, Message message) {
 
 		try {
 
-			FileOutputStream file = new FileOutputStream(path+"\\"+message.getMessageContent());
+			FileOutputStream file = new FileOutputStream(path + "\\" + message.getMessageContent());
 			byte[] bytes = new byte[1024];
 			int cum = input.read(bytes);
-			while(cum!=-1)
-			{
-				file.write(bytes,0,cum);
+			while (cum != -1) {
+				file.write(bytes, 0, cum);
 				cum = input.read(bytes);
 			}
 			file.flush();
