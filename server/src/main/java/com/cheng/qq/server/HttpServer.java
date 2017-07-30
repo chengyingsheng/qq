@@ -17,6 +17,12 @@ public class HttpServer {
 
     private static Log log = LogFactory.getLog(HttpServer.class);
 
+    public static void main(String[] args) throws Exception {
+        HttpServer server = new HttpServer();
+        log.info("Http Server listening on 8844 ...");
+        server.start(8844);
+    }
+
     public void start(int port) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -42,11 +48,5 @@ public class HttpServer {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        HttpServer server = new HttpServer();
-        log.info("Http Server listening on 8844 ...");
-        server.start(8844);
     }
 }

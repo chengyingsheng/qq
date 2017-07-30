@@ -3,7 +3,10 @@ package com.cheng.qq.server.ui;
 import com.cheng.qq.common.Message;
 import com.cheng.qq.common.SwingResourceManager;
 import com.cheng.qq.common.UserValue;
+import com.cheng.qq.server.HttpServer;
 import com.cheng.qq.server.ServerListen;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +25,7 @@ import java.util.Set;
 public class SeverMainGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static Log log = LogFactory.getLog(HttpServer.class);
 	//
 	private ServerSocket serverSocket;
 	private ServerListen listenThread;
@@ -208,13 +212,19 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 			serverSocket = new ServerSocket(8000, 10);
 			messageHistory.append("[系统消息]服务端已经启动，在8000端口侦听...\n");
 
+			users = new HashMap<>();
+			// 启动服务器监听线程
+			listenThread = new ServerListen(serverSocket, userBox, messageHistory,
+					users);
+			listenThread.start();
+			HttpServer server = new HttpServer();
+			log.info("Http Server listening on 8844 ...");
+			server.start(8844);
+
 		} catch (Exception e) {
+			log.error("start error", e);
 		}
-		users = new HashMap<>();
-		// 启动服务器监听线程
-		listenThread = new ServerListen(serverSocket, userBox, messageHistory,
-				users);
-		listenThread.start();
+
 	}
 
 	/**

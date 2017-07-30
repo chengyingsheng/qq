@@ -14,6 +14,13 @@ import io.netty.handler.codec.http.*;
 import java.net.URI;
 
 public class HttpClient {
+
+
+    public static void main(String[] args) throws Exception {
+        HttpClient client = new HttpClient();
+        client.connect("127.0.0.1", 8844);
+    }
+
     public void connect(String host, int port) throws Exception {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -46,6 +53,7 @@ public class HttpClient {
             request.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
             request.headers().set(HttpHeaders.Names.CONTENT_LENGTH, request.content().readableBytes());
             // 发送http请求
+
             f.channel().write(request);
             f.channel().flush();
             f.channel().closeFuture().sync();
@@ -53,10 +61,5 @@ public class HttpClient {
             workerGroup.shutdownGracefully();
         }
 
-    }
-
-    public static void main(String[] args) throws Exception {
-        HttpClient client = new HttpClient();
-        client.connect("127.0.0.1", 8844);
     }
 }
