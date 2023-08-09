@@ -150,6 +150,7 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 		this.setIconImage(SwingResourceManager.getImage(this.getClass().getResource("/").getPath() + "images/icon.png"));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 启动服务器
 		if (e.getSource() == startServer) {
@@ -217,9 +218,9 @@ public class SeverMainGUI extends JFrame implements ActionListener {
 			listenThread = new ServerListen(serverSocket, userBox, messageHistory,
 					users);
 			listenThread.start();
-			HttpServer server = new HttpServer();
-			log.info("Http Server listening on 8844 ...");
-			server.start(8844);
+//			HttpServer server = new HttpServer();
+//			log.info("Http Server listening on 8844 ...");
+//			server.start(8844);
 
 		} catch (Exception e) {
 			log.error("start error", e);

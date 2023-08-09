@@ -100,6 +100,7 @@ public class LoginGui extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == button_1) {
@@ -111,12 +112,12 @@ public class LoginGui extends JFrame implements ActionListener {
             //连接服务器
             client = ClientConnect.getInstance(loginGUI, c, username, password);
             client.connect();
-            HttpClient client = new HttpClient();
-            try {
-                client.connect("127.0.0.1", 8844);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+//            HttpClient client = new HttpClient();
+//            try {
+//                client.connect("127.0.0.1", 8844);
+//            } catch (Exception e1) {
+//                e1.printStackTrace();
+//            }
 
 
         } else if (e.getSource() == button) {
